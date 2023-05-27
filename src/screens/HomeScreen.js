@@ -1,37 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useContext, useEffect, useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import React from "react";
+import { Text, View, StyleSheet, Button } from "react-native";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 import { AuthContext } from "../context/AuthContext";
-import List from '../components/List/List';
-import axios from 'axios';
-import { NavigationContainer } from '@react-navigation/native';
 
 const HomeScreen = () => {
-    const {userInfo} = useContext(AuthContext);
-    const [data, setData] = useState([]);
 
-    useEffect(() => {
+    const {userInfo, isLoading, logout} = useContext(AuthContext);
 
-        const getData = () => {
-            
-            setData() 
-            axios.get("")
-                .then(response => setData(response.data.result))
-                .catch(error => console.log(error) )
-        }
-        getData();
-    }, [])
-    return (
-        <View>
-            <View>
-                <List data = {data} />
-            </View>
+    return(
+        <View style={styles.container}>
+            <Spinner visible={isLoading}/>
+            <Text style={styles.welcome}>Welcome {userInfo.user.name}</Text>
+            <Button title="Logout" color="red" onPress={logout}/>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    welcome: {
+        fontSize: 18,
+        marginBottom: 8,
+    },
 })
-
-export default HomeScreen;
