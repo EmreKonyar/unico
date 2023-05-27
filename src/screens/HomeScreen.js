@@ -15,9 +15,9 @@ const HomeScreen = () => {
         const getData = () => {
             
             setData() 
-            //axios.get("") //URL
-            //.then(response => setData(response.data.result))
-            //.catch(error => console.log(error) )
+            axios.get("")
+                .then(response => setData(response.data.result))
+                .catch(error => console.log(error) )
         }
         getData();
     }, [])
