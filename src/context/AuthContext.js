@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [splashLoading, setSplashLoading] = useState(false);
+  const [isLogIn, setIsLogIn] = useState(false);
 
   const login = (username, password) => {
     setIsLoading(true);
@@ -20,10 +21,10 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         let userInfo = res.data;
-        console.log(userInfo);
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
+        setIsLogIn(true);
       })
       .catch((e) => {
         console.log(`login error ${e}`);
@@ -34,13 +35,26 @@ export const AuthProvider = ({ children }) => {
   const isLoggedIn = async () => {
     try {
       setSplashLoading(true);
-
+      
       let userInfo = await AsyncStorage.getItem("userInfo");
       userInfo = JSON.parse(userInfo);
+      const token = userInfo.token;
 
-      if (userInfo) {
+      axios.get(`${BASE_URL}/health`, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then((res) => {
+        let userInfo = res.data;
         setUserInfo(userInfo);
-      }
+        setIsLoading(false);
+        setIsLogIn(true);
+      })
+      .catch((e) => {
+        console.log(`login error ${e}`);
+        setIsLoading(false);
+      });
 
       setSplashLoading(false);
     } catch (e) {
@@ -49,10 +63,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  
   useEffect(() => {
     isLoggedIn();
   }, []);
-
+  
   return (
     <AuthContext.Provider
       value={{
@@ -60,6 +75,7 @@ export const AuthProvider = ({ children }) => {
         userInfo,
         splashLoading,
         login,
+        isLogIn
       }}
     >
       {children}

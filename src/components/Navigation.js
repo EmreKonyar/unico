@@ -9,19 +9,19 @@ import BottomTabNavigator from "./BottomTabNavigator";
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-  const { userInfo, splashLoading } = useContext(AuthContext);
-
+  const {userInfo, splashLoading, isLogIn} = useContext(AuthContext);
+  console.log(userInfo);
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {splashLoading ? (
+        {isLogIn ? (
+          <Stack.Screen name="Home" component={BottomTabNavigator} />
+        ) : splashLoading ? (
           <Stack.Screen
             name="Splash Screen"
             component={SplashScreen}
             options={{ headerShown: false }}
           />
-        ) : userInfo.access_token ? (
-          <Stack.Screen name="Home" component={BottomTabNavigator} />
         ) : (
           <>
             <Stack.Screen
