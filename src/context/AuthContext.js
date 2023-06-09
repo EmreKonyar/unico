@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [splashLoading, setSplashLoading] = useState(false);
-  const [isLogIn, setIsLogIn] = useState(false);
+  const [isLogIn, setIsLogIn] = useState(true);
 
   const login = (username, password) => {
     setIsLoading(true);
