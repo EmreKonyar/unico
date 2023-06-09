@@ -8,30 +8,9 @@ const HomeScreen = () => {
   const { userInfo, isLoading, logout } = useContext(AuthContext);
 
 
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/photos")
-    .then(response => setData(response.data))
-    .catch(error => console.log(error));
-  }, [])
-
   return (
     <ScrollView>
-      {
-      data.map((info) =>(
-        <View style={styles.container}
-        key={info.id}
-        >
-          <Image 
-          source={{uri: info.thumbnailUrl}}
-          style={styles.image}
-          />
-          <Text>{info.title}</Text>
-          <Text>{info.id}</Text>
-        </View>
-        ))
-      }
+
     </ScrollView>
   );
 };
