@@ -10,12 +10,11 @@ const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   const {userInfo, splashLoading, isLogIn} = useContext(AuthContext);
-  console.log(userInfo);
   return (
     <NavigationContainer>
       <Stack.Navigator>
         {isLogIn ? (
-          <Stack.Screen name="Home" component={BottomTabNavigator} />
+          <Stack.Screen name="BottomTab" component={BottomTabNavigator} options={{ headerShown: false }}/>
         ) : splashLoading ? (
           <Stack.Screen
             name="Splash Screen"
