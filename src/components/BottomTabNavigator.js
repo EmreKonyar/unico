@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import HomeScreen from '../screens/HomeScreen';
-import ChatScreen from '../screens/ChatScreen';
+import ChatScreen from '../components/Rooms/RoomItem';
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
