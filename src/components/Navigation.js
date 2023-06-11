@@ -21,22 +21,6 @@ const Navigation = () => {
         {isLogIn ? (
           <>
           <Stack.Screen name="BottomTab" component={BottomTabNavigator} options={{ headerShown: false }}/>
-          <Stack.Screen 
-            name='Chats' 
-            component={ChatsScreen} 
-            options={({navigation}) => ({
-              headerRight: () => (
-                <Ionicons 
-                  onPress={() => navigation.navigate('Contacts')} 
-                  name= 'create-outline' 
-                  size={18} 
-                  color={'#e66f6f'} 
-                  style={{marginRight: 1}} 
-                    
-                />
-            )
-            })}
-            />
           <Stack.Screen name = "Chat" component={ChatScreen} />
           <Stack.Screen name="Contacts" component={ContactsScreen}/>
           </>
