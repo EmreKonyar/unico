@@ -1,4 +1,19 @@
-import React from 'react';
+import { FlatList } from 'react-native';
+import chats from '../../../assets/data/chats.json';
+import ChatListItem from '../ChatListItem';
+
+const ChatsScreen = () => {
+    return (
+      <FlatList 
+        data={chats}
+        renderItem={({item}) => <ChatListItem chat={item} /> }
+      />
+    )
+  }
+  
+  export default ChatsScreen
+
+/*import React from 'react';
 import { View , Text,StyleSheet,TouchableOpacity} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import NavigationService from "../NavigationService";
@@ -49,3 +64,4 @@ const style = StyleSheet.create({
     }
 })
 export default RoomItem;
+*/

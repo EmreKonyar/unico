@@ -1,11 +1,16 @@
 import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "../screens/HomeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import { AuthContext } from "../context/AuthContext";
 import SplashScreen from "../screens/SplashScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
+import ChatsScreen from "./Rooms/RoomItem";
+import ChatScreen from "./Rooms/ChatScreen";
+import ContactsScreen from "./Rooms/ContactsScreen";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { size } from "lodash";
+
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -14,7 +19,27 @@ const Navigation = () => {
     <NavigationContainer>
       <Stack.Navigator>
         {isLogIn ? (
+          <>
           <Stack.Screen name="BottomTab" component={BottomTabNavigator} options={{ headerShown: false }}/>
+          <Stack.Screen 
+            name='Chats' 
+            component={ChatsScreen} 
+            options={({navigation}) => ({
+              headerRight: () => (
+                <Ionicons 
+                  onPress={() => navigation.navigate('Contacts')} 
+                  name= 'create-outline' 
+                  size={18} 
+                  color={'#e66f6f'} 
+                  style={{marginRight: 1}} 
+                    
+                />
+            )
+            })}
+            />
+          <Stack.Screen name = "Chat" component={ChatScreen} />
+          <Stack.Screen name="Contacts" component={ContactsScreen}/>
+          </>
         ) : splashLoading ? (
           <Stack.Screen
             name="Splash Screen"
@@ -28,8 +53,11 @@ const Navigation = () => {
               component={LoginScreen}
               options={{ headerShown: false }}
             />
+            
           </>
         )}
+
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

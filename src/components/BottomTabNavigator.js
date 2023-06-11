@@ -28,7 +28,7 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Chat"
+        name="ChatScren"
         component={ChatScreen}
         options={{
           headerShown: true,
