@@ -8,21 +8,25 @@ import BottomTabNavigator from "./BottomTabNavigator";
 import ChatsScreen from "./Rooms/RoomItem";
 import ChatScreen from "./Rooms/ChatScreen";
 import ContactsScreen from "./Rooms/ContactsScreen";
-import Ionicons from '@expo/vector-icons/Ionicons';
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { size } from "lodash";
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-  const {userInfo, splashLoading, isLogIn} = useContext(AuthContext);
+  const { userInfo, splashLoading, isLogIn } = useContext(AuthContext);
   return (
     <NavigationContainer>
       <Stack.Navigator>
         {isLogIn ? (
           <>
-          <Stack.Screen name="BottomTab" component={BottomTabNavigator} options={{ headerShown: false }}/>
-          <Stack.Screen name = "Chat" component={ChatScreen} />
-          <Stack.Screen name="Contacts" component={ContactsScreen}/>
+            <Stack.Screen
+              name="BottomTab"
+              component={BottomTabNavigator}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="inChat" component={ChatScreen} />
+            <Stack.Screen name="Contacts" component={ContactsScreen} />
           </>
         ) : splashLoading ? (
           <Stack.Screen
@@ -37,11 +41,8 @@ const Navigation = () => {
               component={LoginScreen}
               options={{ headerShown: false }}
             />
-            
           </>
         )}
-
-        
       </Stack.Navigator>
     </NavigationContainer>
   );

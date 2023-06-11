@@ -28,9 +28,9 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="ChatScren"
+        name="Chat Screen"
         component={ChatScreen}
-        options={({navigation}) => ({
+        options={({ navigation }) => ({
           tabBarIcon: ({ color, size }) => (
             <Ionicons
               name="chatbox-ellipses-outline"
@@ -38,17 +38,17 @@ const BottomTabNavigator = () => {
               size={size}
             />
           ),
-              headerShown: true,
-              headerRight: () => (
-                <Ionicons 
-                  onPress={() => navigation.navigate('Contacts')} 
-                  name= 'create-outline' 
-                  size={18} 
-                  color={'#e66f6f'} 
-                  style={{marginRight: 15}} 
-                />
-              )
-            })}
+          headerShown: true,
+          headerRight: () => (
+            <Ionicons
+              onPress={() => navigation.navigate("Contacts")}
+              name="create-outline"
+              size={18}
+              color={"#e66f6f"}
+              style={{ marginRight: 15 }}
+            />
+          ),
+        })}
         /*options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (

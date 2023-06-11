@@ -11,7 +11,6 @@ const App = () => {
         <Navigation />
       </Provider>
     </AuthProvider>
-
   );
 };
 

@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (username, password) => {
     setIsLoading(true);
-
+    
     axios
       .post(`${BASE_URL}/auth/login`, {
         username,
@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         let userInfo = res.data;
+        userInfo.username = username;
         setUserInfo(userInfo);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
@@ -62,7 +63,6 @@ export const AuthProvider = ({ children }) => {
       console.log(`is logged in error ${e}`);
     }
   };
-
   
   useEffect(() => {
     isLoggedIn();

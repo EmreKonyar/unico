@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     borderColor: "#bbb",
     borderRadius: 10,
     paddingHorizontal: 14,
-    paddingVertical: 14
+    paddingVertical: 14,
   },
   logo: {
     width: "70%",

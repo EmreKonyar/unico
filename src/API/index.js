@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as BASE_URL from "../config";
+import {BASE_URL} from "../config";
 
 const service = {
   post: (endPoint, data, header) => {
