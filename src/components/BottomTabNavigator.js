@@ -13,8 +13,8 @@ const BottomTabNavigator = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: { backgroundColor: "#e66f6f" },
-        tabBarInactiveTintColor: "#000",
-        tabBarActiveTintColor: "#fff",
+        tabBarInactiveTintColor: "#292D32",
+        tabBarActiveTintColor: "#eee",
       }}
     >
       <Tab.Screen
@@ -49,16 +49,6 @@ const BottomTabNavigator = () => {
             />
           ),
         })}
-        /*options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              name="chatbox-ellipses-outline"
-              color={color}
-              size={size}
-            />
-          ),
-        }}*/
       />
     </Tab.Navigator>
   );

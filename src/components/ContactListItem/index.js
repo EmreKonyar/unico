@@ -10,7 +10,7 @@ const ContactListItem = ({ user }) => {
   return (
     <Pressable
       onPress={() =>
-        navigation.navigate("Chat", { id: user.id, name: user.name })
+        navigation.navigate("inChat", { id: user.id, name: user.name })
       }
       style={styles.container}
     >
