@@ -3,6 +3,9 @@ import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import { getHome } from "../redux/actions";
 import { data } from "../API/mock";
+import dayjs from "dayjs";
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 const HomeScreen = ({ dispatch, homeData, loading, error }) => {
   useEffect(() => {
@@ -24,11 +27,11 @@ const HomeScreen = ({ dispatch, homeData, loading, error }) => {
           data
         ) => (
           <View style={styles.container} key={data.id}>
+            <Text style={styles.clubName}>{data.clubName}</Text>
             <Image source={{ uri: data.imageUrls }} style={styles.image} />
-            <Text>{data.title}</Text>
-            <Text>{data.clubName}</Text>
-            <Text>{data.description}</Text>
-            <Text>{data.creationDate}</Text>
+            <Text style={styles.title}>{data.title}</Text>
+            <Text style={styles.title}>{data.description}</Text>
+            <Text style={styles.title}>{dayjs(data.creationDate).fromNow(true)}</Text>
           </View>
         )
       )}
@@ -46,16 +49,32 @@ export default connect(mapStateToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {
+    marginLeft: 20,
+    marginRight: 20,
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
     display: "flex",
     marginBottom: 20,
     padding: 10,
     borderWidth: 1,
-    borderColor: "#e66f6f",
+    backgroundColor: '#e66f6f',
+    borderColor: "#fff",
     borderRadius: 10,
   },
   image: {
-    width: 100,
-    height: 100,
+    borderRadius: 30,
+    width: 250,
+    height: 250,
     margin: 10,
+  },
+  clubName:{
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  title:{
+    color: '#fff',
+    fontSize: 15,
   },
 });
