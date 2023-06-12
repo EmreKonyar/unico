@@ -11,17 +11,15 @@ dayjs.extend(relativeTime);
 const HomeScreen = ({ dispatch, homeData, loading, error }) => {
   const [refreshing, setRefreshing] = useState(false)
 
-  const onRefresh = () =>{
+  const onRefresh = () => {
     setRefreshing(true);
-    fetch()
-    .then(homeData=>{
-      dispatch(homeData);
-      setRefreshing(false)
-    }, 1000)
-
-    
-    
-  }
+    dispatch(getHome())
+      .then(() => setRefreshing(false))
+      .catch((error) => {
+        console.log(error);
+        setRefreshing(false);
+      });
+  };
 
   useEffect(() => {
     dispatch(getHome());
@@ -40,7 +38,7 @@ const HomeScreen = ({ dispatch, homeData, loading, error }) => {
     refreshControl={
       <RefreshControl 
         refreshing={refreshing}
-        onRefresh={() => onRefresh()}
+        onRefresh={onRefresh}
       />
     }
     >
