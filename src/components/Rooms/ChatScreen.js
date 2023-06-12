@@ -22,7 +22,7 @@ const ChatScreen = () => {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS == "android" ? "padding" : "height"}
+      behavior={Platform.OS == 'android' ? 40 : 0}
       style={styles.bg}
       keyboardVerticalOffset={90}
     >
