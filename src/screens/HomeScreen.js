@@ -30,8 +30,8 @@ const HomeScreen = ({ dispatch, homeData, loading, error }) => {
             <Text style={styles.clubName}>{data.clubName}</Text>
             <Image source={{ uri: data.imageUrls }} style={styles.image} />
             <Text style={styles.title}>{data.title}</Text>
-            <Text style={styles.title}>{data.description}</Text>
-            <Text style={styles.title}>{dayjs(data.creationDate).fromNow(true)}</Text>
+            <Text style={styles.description}>{data.description}</Text>
+            <Text style={styles.creationDate}>{dayjs(data.creationDate).fromNow()}</Text>
           </View>
         )
       )}
@@ -71,10 +71,18 @@ const styles = StyleSheet.create({
   clubName:{
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 23,
   },
   title:{
+    color: '#000',
+    fontSize: 18,
+  },
+  description: {
     color: '#fff',
+    fontSize: 15,
+  },
+  creationDate:{
+    color: '#000',
     fontSize: 15,
   },
 });
