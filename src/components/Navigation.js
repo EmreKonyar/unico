@@ -10,8 +10,10 @@ import ChatScreen from "./Rooms/ChatScreen";
 import ContactsScreen from "./Rooms/ContactsScreen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { size } from "lodash";
-
+import logo from '../../assets/Logo.png';
 const Stack = createNativeStackNavigator();
+
+
 
 const Navigation = () => {
   const { userInfo, splashLoading, isLogIn } = useContext(AuthContext);
@@ -47,5 +49,7 @@ const Navigation = () => {
     </NavigationContainer>
   );
 };
+
+
 
 export default Navigation;
