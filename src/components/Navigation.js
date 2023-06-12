@@ -5,12 +5,7 @@ import LoginScreen from "../screens/LoginScreen";
 import { AuthContext } from "../context/AuthContext";
 import SplashScreen from "../screens/SplashScreen";
 import BottomTabNavigator from "./BottomTabNavigator";
-import ChatsScreen from "./Rooms/RoomItem";
 import ChatScreen from "./Rooms/ChatScreen";
-import ContactsScreen from "./Rooms/ContactsScreen";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { size } from "lodash";
-import logo from '../../assets/Logo.png';
 const Stack = createNativeStackNavigator();
 
 
@@ -28,7 +23,6 @@ const Navigation = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen name="inChat" component={ChatScreen} />
-            <Stack.Screen name="Contacts" component={ContactsScreen} />
           </>
         ) : splashLoading ? (
           <Stack.Screen

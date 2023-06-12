@@ -63,11 +63,11 @@ export const AuthProvider = ({ children }) => {
       console.log(`is logged in error ${e}`);
     }
   };
-  
+  /*
   useEffect(() => {
     isLoggedIn();
   }, []);
-  
+  */
   return (
     <AuthContext.Provider
       value={{

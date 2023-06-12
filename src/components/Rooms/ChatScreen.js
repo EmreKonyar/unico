@@ -5,20 +5,33 @@ import {
   FlatList,
   KeyboardAvoidingView,
   Platform,
+  Image,
+  Text
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import bg from "../../../assets/images/BG.png";
 import Message from "./Message";
 import messages from "../../../assets/data/messages.json";
 import InputBox from "../InputBox";
+import g from "../../../assets/g.png";
+import t from "../../../assets/t.png";
 
 const ChatScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
 
   useEffect(() => {
-    navigation.setOptions({ title: route.params.name });
-  }, [route.params.name]);
+    navigation.setOptions({
+      headerTitle: () => (
+        <>
+          <Image source={route.params.role === "TEACHER" ? t : g} style={styles.image} />
+          <Text>
+            {route.params.username}
+          </Text>
+        </>
+      )
+    });
+  }, [route.params.username]);
 
   return (
     <KeyboardAvoidingView
@@ -45,6 +58,12 @@ const styles = StyleSheet.create({
   },
   list: {
     padding: 10,
+  },
+  image: {
+    width: 35,
+    height: 35,
+    borderRadius: 10,
+    marginRight: 5,
   },
 });
 

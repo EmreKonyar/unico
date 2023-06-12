@@ -2,10 +2,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { StyleSheet, View, Image } from "react-native";
 import HomeScreen from "../screens/HomeScreen";
-import ChatScreen from "../components/Rooms/RoomItem";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import ContactsScreen from "./Rooms/ContactsScreen";
-import logo from '../../assets/Logo.png';
 
 const Tab = createBottomTabNavigator();
 
