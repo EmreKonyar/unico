@@ -1,13 +1,28 @@
-import React, { useEffect } from "react";
-import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { Text, View, StyleSheet, Image, ScrollView, RefreshControl } from "react-native";
+import { connect, useDispatch } from "react-redux";
 import { getHome } from "../redux/actions";
 import { data } from "../API/mock";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
+
 const HomeScreen = ({ dispatch, homeData, loading, error }) => {
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = () =>{
+    setRefreshing(true);
+    fetch()
+    .then(homeData=>{
+      dispatch(homeData);
+      setRefreshing(false)
+    }, 1000)
+
+    
+    
+  }
+
   useEffect(() => {
     dispatch(getHome());
   }, [dispatch]);
@@ -21,7 +36,14 @@ const HomeScreen = ({ dispatch, homeData, loading, error }) => {
   }
 
   return (
-    <ScrollView>
+    <ScrollView
+    refreshControl={
+      <RefreshControl 
+        refreshing={refreshing}
+        onRefresh={() => onRefresh()}
+      />
+    }
+    >
       {homeData.map(
         (
           data
