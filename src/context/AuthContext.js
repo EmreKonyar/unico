@@ -54,12 +54,18 @@ export const AuthProvider = ({ children }) => {
       })
       .catch((e) => {
         console.log(`login error ${e}`);
+        setUserInfo(null);
+        setIsLoading(false);
+        setIsLogIn(false);
         setIsLoading(false);
       });
 
       setSplashLoading(false);
     } catch (e) {
-      setSplashLoading(false);
+      setUserInfo(null);
+        setIsLoading(false);
+      setIsLogIn(false);
+      setIsLoading(false);
       console.log(`is logged in error ${e}`);
     }
   };

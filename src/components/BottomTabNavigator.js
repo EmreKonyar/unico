@@ -53,19 +53,7 @@ const BottomTabNavigator = () => {
               color={color}
               size={size}
             />
-          )/*,
-          headerShown: true,
-          headerRight: () => (
-            <Ionicons
-              onPress={() => navigation.navigate("Contacts")}
-              name="create-outline"
-              size={18}
-              color={"#e66f6f"}
-              style={{ marginRight: 15 }}
-            />
-          ),
-          
-          */
+          )
         })}
       />
     </Tab.Navigator>
@@ -76,12 +64,12 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f8f4f4'
-    
+    backgroundColor: '#eee'
   },
   headerImage: {
-    width: 150,
-    height: 75,
+    marginTop: 30,
+    width: 90,
+    height: 45,
      
   },
 });

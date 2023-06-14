@@ -3,18 +3,22 @@ import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const InputBox = () => {
+const InputBox = ({username, stompClient}) => {
   const [newMessage, setNewMessage] = useState("");
 
-  const onSend = () => {
-    console.warn("Sending a new message");
+  const onSendMessage = () => {
+    var chatMessage = {
+      senderUsername: "180704016",
+      groupName: username,
+      message: newMessage
+    }
+    console.log(chatMessage);
+    stompClient.send("/app/message", {Authorization: "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxODA3MDQwMTYiLCJpYXQiOjE2ODY3MDI2NzcsInJvbGVzIjpbIlJPTEVfU1RVREVOVCJdLCJleHAiOjE2ODY3ODkwNzd9.NNWY6Lr20hDBa2KHq6SI1BVbuI3iHwNLAaktP08jJS-K-F66XgFuQFO8C9O7G5yy"}, JSON.stringify(chatMessage))
     setNewMessage();
   };
 
   return (
     <SafeAreaView edges={["bottom"]} style={styles.container}>
-      <Ionicons name="add-outline" size={20} color="#e66f6f" />
-
       <TextInput
         value={newMessage}
         onChangeText={setNewMessage}
@@ -23,7 +27,7 @@ const InputBox = () => {
       />
 
       <Ionicons
-        onPress={onSend}
+        onPress={onSendMessage}
         style={styles.send}
         name="send-outline"
         size={16}
@@ -42,20 +46,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   input: {
-    flex: 1,
+    flex: 20,
     backgroundColor: "white",
-    padding: 5,
-    paddingHorizontal: 10,
-    marginHorizontal: 10,
+    padding: 6,
+    paddingHorizontal: 12,
+    marginRight: 10,
     borderRadius: 50,
     borderColor: "lightgray",
     borderWidth: StyleSheet.hairlineWidth,
   },
   send: {
+    flex: 1,
     backgroundColor: "#e66f6f",
     padding: 7,
     borderRadius: 15,
     overflow: "hidden",
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
   },
 });
 
