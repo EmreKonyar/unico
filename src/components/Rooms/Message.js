@@ -4,12 +4,10 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
-const Message = ({ chatsInfo, username}) => {
+const Message = ({ chatsInfo, username, chatType}) => {
   const chat = JSON.parse(chatsInfo);
 
   const isMyMessage = () => {
-    console.log("chat.senderUsername = " + chat.senderUsername);
-    console.log("username = " + username);
     return chat.senderUsername == username;
   };
   
@@ -24,6 +22,7 @@ const Message = ({ chatsInfo, username}) => {
         },
       ]}
     >
+      
       <Text>{chat.message}</Text>
     </View>
   );

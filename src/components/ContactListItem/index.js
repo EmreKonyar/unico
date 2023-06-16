@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import g from "../../../assets/g.png";
 import t from "../../../assets/t.png";
+import s from "../../../assets/s.png";
 
 dayjs.extend(relativeTime);
 
@@ -16,7 +17,7 @@ const ContactListItem = ({ user }) => {
       }
       style={styles.container}
     >
-      <Image source={user.role === "TEACHER" ? t : g} style={styles.image} />
+      <Image source={user.role === "TEACHER" ? t : user.role === "STUDENT" ? s: g} style={styles.image} />
       <Text style={styles.name} numberOfLines={1}>
         {user.username}
       </Text>

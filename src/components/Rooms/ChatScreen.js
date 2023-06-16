@@ -15,6 +15,7 @@ import Message from "./Message";
 import InputBox from "../InputBox";
 import g from "../../../assets/g.png";
 import t from "../../../assets/t.png";
+import s from "../../../assets/s.png";
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 import {WEBSOCKET_URL} from "../../config.js";
@@ -26,7 +27,6 @@ var stompClient = null;
 
 const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
-  const header = {"Authorization": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxODA3MDQwMTYiLCJpYXQiOjE2ODY3MDI2NzcsInJvbGVzIjpbIlJPTEVfU1RVREVOVCJdLCJleHAiOjE2ODY3ODkwNzd9.NNWY6Lr20hDBa2KHq6SI1BVbuI3iHwNLAaktP08jJS-K-F66XgFuQFO8C9O7G5yy"}
 
   const route = useRoute();
   const navigation = useNavigation();
@@ -40,7 +40,7 @@ const ChatScreen = () => {
       headerTitle: () => (
         <>
           <Image
-            source={route.params.role === "TEACHER" ? t : g}
+            source={route.params.role === "TEACHER" ? t : route.params.role === "STUDENT" ? s : g}
             style={styles.image}
           />
           <Text>{route.params.username}</Text>
@@ -59,9 +59,21 @@ const ChatScreen = () => {
     stompClient.connect({}, onConnected, onError);
   };
 
-  const onConnected = () => {
+  const onConnected = async () => {
+    var destination = '/chatroom/' + route.params.username;
     console.log("CONNECTION SUCCESSFUL!");
-    stompClient.subscribe('/chatroom/' + route.params.username, onMessageReceived);
+    if(route.params.role === "TEACHER" || route.params.role === "STUDENT") {
+      var sender = parseInt(await Script.getUsername());
+      var receiver = parseInt(route.params.username);
+
+      if(sender > receiver) {
+        destination = '/chatroom/' + receiver.toString() + "_" + sender.toString();
+      } else {
+        destination ='/chatroom/' + sender.toString() + "_" + receiver.toString();
+      }
+    }
+
+    stompClient.subscribe(destination, onMessageReceived);
   };
 
   const onError = (err) => {
@@ -75,14 +87,25 @@ const ChatScreen = () => {
     setMessages([...messages])
   };
 
-  const onSendMessage = () => {
+  const onSendMessage = async () => {
+    var groupName = route.params.username;
+    if(route.params.role === "TEACHER" || route.params.role === "STUDENT") {
+      var sender = username;
+      var receiver = parseInt(route.params.username);
+
+      if(sender > receiver) {
+        groupName = receiver.toString() + "_" + sender.toString();
+      } else {
+        groupName = sender.toString() + "_" + receiver.toString();
+      }
+    }
     var chatMessage = {
       senderUsername: username,
-      groupName: route.params.username,
+      groupName: groupName,
       message: newMessage
     }
     console.log(chatMessage);
-    stompClient.send("/app/message", header, JSON.stringify(chatMessage))
+    stompClient.send("/app/message", {}, JSON.stringify(chatMessage))
     setNewMessage();
   };
 
@@ -100,6 +123,7 @@ const ChatScreen = () => {
             <Message
               chatsInfo={item.body}
               username={username}
+              chatType={route.params.role}
             /> : 
             <></>
           )}
