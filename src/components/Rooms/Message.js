@@ -17,13 +17,17 @@ const Message = ({ chatsInfo, username, chatType}) => {
       style={[
         styles.container,
         {
-          backgroundColor: isMyMessage() ? "#e66f6f" : "gray",
+          backgroundColor: isMyMessage() ? "#e66f6f" : "#2291ee",
           alignSelf: isMyMessage() ? "flex-end" : "flex-start",
         },
       ]}
     >
-      
-      <Text>{chat.message}</Text>
+      {chatType === "GROUP" ? (<>
+        <Text style={styles.username}>{username}</Text>
+        <Text style={{color: "white"}}>{chat.message}</Text>
+      </>) : (<>
+        <Text>{chat.message}</Text>
+      </>)}
     </View>
   );
 };
@@ -34,7 +38,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     maxWidth: "80%",
-    shadowColor: "#000",
+    shadowColor: "#292D32",
     shadowOffset: {
       width: 0,
       height: 1,
@@ -43,50 +47,12 @@ const styles = StyleSheet.create({
     shadowRadius: 1.0,
     elevation: 1,
   },
-  time: {
-    color: "white",
-    alignSelf: "flex-end",
-  },
+  username: {
+    color: "black",
+    textDecorationLine: 'underline',
+    marginBottom: 3
+
+  }
 });
 
 export default Message;
-
-/*import React from 'react';
-import { View , Text , StyleSheet} from 'react-native';
-//import firebase from "@react-native-firebase/app";
-
-const Message  = ({item , index}) => {
-   //const user = firebase.auth().currentUser;
- // const userId = user.uid;
-  return <View style={(userId != item.userId  ) ? style.other : style.me}>
-            <View style={[style.bubble,{backgroundColor:(userId != item.userId) ? '#EAEAEA' : '#30B485' }]}>
-                <Text style={{ fontSize:17,color:(userId != item.userId) ? '#575757' : 'white'}}>{item.text}</Text>
-                <Text style={{ fontSize:11,color:(userId != item.userId) ? '#575757' : 'white'}}>{item.userName}</Text>
-            </View>
-         </View>
-};
-
-const style = StyleSheet.create({
-    other:{
-        flexDirection:'row',
-        flex:1,
-        justifyContent:'flex-start',
-    },
-    me:{
-        flexDirection:'row',
-        flex:1,
-        justifyContent:'flex-end',
-    },
-    bubble:{
-        paddingLeft: 15,
-        paddingRight: 15,
-        paddingTop:5,
-        paddingBottom:5,
-        marginBottom:5,
-        borderRadius:10,
-    }
-})
-
-
-export default Message;
-*/

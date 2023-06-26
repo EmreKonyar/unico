@@ -10,7 +10,7 @@ import {
   TextInput
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import bg from "../../../assets/images/BG.png";
+import bg from "../../../assets/images/BG2.png";
 import Message from "./Message";
 import InputBox from "../InputBox";
 import g from "../../../assets/g.png";
@@ -115,7 +115,7 @@ const ChatScreen = () => {
       style={styles.bg}
       keyboardVerticalOffset={90}
     >
-      <ImageBackground source={bg} style={styles.bg}>
+      <ImageBackground source={bg} style={styles.bg} blurRadius={4}>
         <FlatList
           data={messages}
           renderItem={({ item }) => (
